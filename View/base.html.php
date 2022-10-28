@@ -10,12 +10,28 @@
 </head>
 <body>
 <header>
-    <h1>......</h1>
+    <div id="bar_tittle">
+        <i class="fa-solid fa-bars"></i>
+        <h1>FourTube</h1>
+    </div>
+
+    <div id="search_container">
+        <input id="search" type="search" placeholder="Rechercher">
+        <div id="glass_container">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+    </div>
+
+    <div id="login_register_button">
+        <a href="/?c=user&a=login"><button>Inscription</button></a>
+        <a href="#"><button>Connexion</button></a>
+    </div>
 </header>
 
 <div><?= $html ?></div>
 
 
 <script src="/assets/js/app.js"></script>
+<script src="https://kit.fontawesome.com/e40f017040.js" crossorigin="anonymous"></script>
 </body>
 </html>
