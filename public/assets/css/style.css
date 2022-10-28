@@ -16,6 +16,7 @@ html {
 body {
     background: #181818;
     color: #ffffff;
+    font-size: 1.6rem;
 }
 
 header {
@@ -31,7 +32,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 13rem;
+    width: 17rem;
     padding-left: 1rem;
 }
 
@@ -48,6 +49,7 @@ header {
     background: #323232;
     padding: 0.9rem;
     width: 6rem;
+    cursor: pointer;
 }
 
 .fa-magnifying-glass {
@@ -78,6 +80,46 @@ header {
 button {
     padding: 1rem;
     border: none;
-    background: red;
+    background: dodgerblue;
     cursor: pointer;
 }
+
+fieldset {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    height: 60rem;
+}
+
+form {
+    background: #2e3136;
+    width: 25%;
+    padding: 2rem;
+}
+
+form > div > label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+form > div > input {
+    padding: 1rem;
+    background: #121212;
+    border: none;
+    outline: none;
+    color: lightgray;
+}
+
+.margin_div_form {
+    margin-top: 2rem;
+}
+
+.button_container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+

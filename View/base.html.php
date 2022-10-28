@@ -12,7 +12,7 @@
 <header>
     <div id="bar_tittle">
         <i class="fa-solid fa-bars"></i>
-        <h1>FourTube</h1>
+        <h1><a href="/?c=home">FourTube</a></h1>
     </div>
 
     <div id="search_container">
@@ -23,8 +23,8 @@
     </div>
 
     <div id="login_register_button">
-        <a href="/?c=user&a=login"><button>Inscription</button></a>
-        <a href="#"><button>Connexion</button></a>
+        <a href="/?c=user&a=register"><button>Inscription</button></a>
+        <a href="/?c=user&a=login"><button>Connexion</button></a>
     </div>
 </header>
 
