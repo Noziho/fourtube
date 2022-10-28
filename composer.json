@@ -1,0 +1,12 @@
+{
+    "name": "noahd/fourtube",
+    "description": "A youtube clobe for Fourmies",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/error-handler": "^5.4"
+    }
+}
