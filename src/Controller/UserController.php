@@ -12,10 +12,6 @@ class UserController extends AbstractController
         // TODO: Implement index() method.
     }
 
-    public static function login ()
-    {
-        self::render('user/login');
-    }
 
     public static function register ()
     {
@@ -54,9 +50,30 @@ class UserController extends AbstractController
 
 
         }
-
-
-
-
     }
+
+    public static function login ()
+    {
+        self::render('user/login');
+
+        if (isset($_POST['submit'])) {
+            if (!self::formIsset('email', 'password')) {
+                header("Location: /?c=user&a=login&f=0");
+                exit();
+            }
+
+            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+            $password = $_POST['password'];
+
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                header("Location: /?c=user&a=login&f=2");
+                exit();
+            }
+
+
+            UserManager::login($email, $password);
+
+        }
+    }
+
 }

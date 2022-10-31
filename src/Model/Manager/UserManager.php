@@ -43,5 +43,27 @@ class UserManager {
         return false;
     }
 
+    public static function login (string $email, string $password): void
+    {
+        $stmt = DB_Connect::dbConnect()->prepare("SELECT * FROM " . self::TABLE . " WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+
+        if ($stmt->execute()) {
+            $data = $stmt->fetch();
+            if (password_verify($password, $data['password'])) {
+                $user = self::makeUser($data);
+
+                if (!isset($_SESSION['current_user'])) {
+                    $_SESSION['current_user'] = $user;
+                }
+                header("Location: /?c=home&f=SUCESS");
+            }else {
+                header("Location; /?c=user&a=login&f=WrongPassword");
+            }
+        }else {
+            header("Location: /?c=home&f=GLOBALERROR");
+        }
+    }
+
 
 }

@@ -12,7 +12,7 @@
             </div>
 
             <div class="margin_div_form button_container">
-                <button id="login_button">Se connecter</button>
+                <button id="login_button" name="submit">Se connecter</button>
             </div>
 
         </form>
