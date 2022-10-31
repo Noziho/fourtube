@@ -62,18 +62,22 @@ class UserController extends AbstractController
                 exit();
             }
 
-            $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+            $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $password = $_POST['password'];
-
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                header("Location: /?c=user&a=login&f=2");
-                exit();
-            }
-
 
             UserManager::login($email, $password);
 
         }
+    }
+
+    public function logOut ()
+    {
+        if (!isset($_SESSION['current_user'])) {
+            header("Location: /?c=home");
+        }
+
+        session_destroy();
+        header("Location: /?c=home&f=LogOut");
     }
 
 }

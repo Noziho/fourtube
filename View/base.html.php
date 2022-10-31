@@ -23,8 +23,15 @@
     </div>
 
     <div id="login_register_button">
-        <a href="/?c=user&a=register"><button>Inscription</button></a>
-        <a href="/?c=user&a=login"><button>Connexion</button></a>
+        <?php
+            if (!isset($_SESSION['user'])) {?>
+                <a href="/?c=user&a=register"><button>Inscription</button></a>
+                <a href="/?c=user&a=login"><button>Connexion</button></a><?php
+            }else {?>
+                <a href="/?c=user&a=log-out"><button>Déconnexion</button></a><?php
+            }
+        ?>
+
     </div>
 </header>
 

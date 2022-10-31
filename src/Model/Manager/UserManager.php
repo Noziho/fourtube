@@ -50,15 +50,21 @@ class UserManager {
 
         if ($stmt->execute()) {
             $data = $stmt->fetch();
+            if ($data === false) {
+                header("Location: /?c=user&a=login&f=WrongMail");
+                exit();
+            }
             if (password_verify($password, $data['password'])) {
                 $user = self::makeUser($data);
 
-                if (!isset($_SESSION['current_user'])) {
-                    $_SESSION['current_user'] = $user;
+                if (!isset($_SESSION['user'])) {
+                    $_SESSION['user'] = $user;
                 }
-                header("Location: /?c=home&f=SUCESS");
+                header("Location: /?c=home&f=SUCCESS");
+
             }else {
                 header("Location; /?c=user&a=login&f=WrongPassword");
+
             }
         }else {
             header("Location: /?c=home&f=GLOBALERROR");
