@@ -12,7 +12,9 @@ class VideoController extends AbstractController
 
     public function index()
     {
-        self::render('user/add_video');
+        self::render('user/add_video', [
+            "video" => VideoManager::getAll(),
+        ]);
     }
 
     public function getRandomName(string $fileName): string
@@ -31,18 +33,16 @@ class VideoController extends AbstractController
 
     public function addVideo ()
     {
-
-
         if (isset($_FILES['userVideoFile'])) {
 
 
             $tmp_name = $_FILES['userVideoFile']['tmp_name'];
             $video_name = $this->getRandomName($_FILES['userVideoFile']['name']);
-            if (!is_dir('../video/')) {
-                mkdir('../video/', '0755');
+            if (!is_dir('assets/video/')) {
+                mkdir('assets/video/', '0755');
             }
 
-            move_uploaded_file($tmp_name, '../video/'. $video_name);
+            move_uploaded_file($tmp_name, 'assets/video/'. $video_name);
 
             $sanitize_video_name = preg_replace('/\\.[^.\\s]{2,4}$/', '', $video_name);
 
@@ -60,5 +60,12 @@ class VideoController extends AbstractController
 
         }
 
+    }
+
+    public function showVideo (int $id)
+    {
+        self::render('video/video', [
+            'video' => VideoManager::getVideoById($id),
+        ]);
     }
 }

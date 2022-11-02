@@ -3,7 +3,6 @@
 namespace App\Model\Manager;
 
 use App\Model\DB_Connect;
-use App\Model\Entity\User;
 use App\Model\Entity\Video;
 
 class VideoManager
@@ -18,9 +17,10 @@ class VideoManager
     {
         return (new Video())
             ->setId($data['id'])
-            ->setName($data['name'])
+            ->setVideoName($data['video_name'])
+            ->setTitle($data['title'])
             ->setDescription($data['description'])
-            ->setAuthor(UserManager::getUserById($data['id']));
+            ->setAuthor(UserManager::getUserById($data['user_fk']));
     }
 
     /**
@@ -32,7 +32,7 @@ class VideoManager
         $query = DB_Connect::dbConnect()->query("SELECT * FROM " . self::TABLE);
         if ($query) {
             foreach ($query->fetchAll() as $video) {
-                $data = self::makeVideo($video);
+                $data[] = self::makeVideo($video);
             }
         }
         return $data;
@@ -55,5 +55,12 @@ class VideoManager
         }
 
         return false;
+    }
+
+    public static function getVideoById($video_id): ?Video
+    {
+        $query = DB_Connect::dbConnect()->query("SELECT * FROM ".self::TABLE." WHERE id = $video_id");
+        return $query->execute() ? self::makeVideo($query->fetch()) : null;
+
     }
 }
