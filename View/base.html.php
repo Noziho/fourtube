@@ -28,6 +28,7 @@
                 <a href="/?c=user&a=register"><button>Inscription</button></a>
                 <a href="/?c=user&a=login"><button>Connexion</button></a><?php
             }else {?>
+                <a href="/?c=video"><button id="video_button"><i class="fa-solid fa-video"></i></button></a>
                 <a href="/?c=user&a=log-out"><button>Déconnexion</button></a><?php
             }
         ?>

@@ -6,6 +6,7 @@ class Video extends AbstractEntity
 {
 
     private string $name;
+    private string $description;
     private User $author;
 
     /**
@@ -41,6 +42,24 @@ class Video extends AbstractEntity
     public function setAuthor(User $author): self
     {
         $this->author = $author;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string $description
+     * @return Video
+     */
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
         return $this;
     }
 

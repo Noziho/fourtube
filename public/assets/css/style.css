@@ -122,4 +122,8 @@ form > div > input {
     justify-content: flex-end;
 }
 
+#video_button {
+    border-radius: 36rem;
+}
+
 
