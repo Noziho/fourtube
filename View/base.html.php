@@ -28,6 +28,7 @@
                 <a href="/?c=user&a=register"><button>Inscription</button></a>
                 <a href="/?c=user&a=login"><button>Connexion</button></a><?php
             }else {?>
+                <a href="/?c=user&a=profil&id=<?= $_SESSION['user']->getId() ?>"><button id="video_button"><i class="fa-solid fa-user"></i></button></a>
                 <a href="/?c=video"><button id="video_button"><i class="fa-solid fa-video"></i></button></a>
                 <a href="/?c=user&a=log-out"><button>Déconnexion</button></a><?php
             }

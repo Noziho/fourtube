@@ -99,4 +99,16 @@ class UserController extends AbstractController
         header("Location: /?c=home&f=LogOut");
     }
 
+    public function profil (int $id) {
+        if (!isset($_SESSION['user'])) {
+            header("Location: /?c=home");
+            exit();
+        }
+
+        self::render('user/profil', [
+            "user" => UserManager::getUserById($id),
+        ]);
+
+    }
+
 }
