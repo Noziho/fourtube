@@ -23,4 +23,12 @@ abstract class AbstractController {
         }
         return true;
     }
+
+    public static function rangeCheck (int $min, int $max, string $inputName, string $redirect): void
+    {
+        if (strlen($inputName) < $min || strlen($inputName) > $max) {
+            header("Location: $redirect");
+            exit();
+        }
+    }
 }

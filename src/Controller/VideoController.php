@@ -12,6 +12,10 @@ class VideoController extends AbstractController
 
     public function index()
     {
+        if (!isset($_SESSION['user'])) {
+            header("Location: /?c=home");
+            exit();
+        }
         self::render('user/add_video', [
             "video" => VideoManager::getAll(),
         ]);
@@ -52,6 +56,9 @@ class VideoController extends AbstractController
 
             $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
             $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+
+            self::rangeCheck(8, 30, $title, '/?c=video&a=video&f=MauvaiseLongueurDeTitre');
+            self::rangeCheck(8, 30, $description, '/?c=video&a=video&f=MauvaiseLongueurDeDescription');
 
             $user = UserManager::getUserById($_SESSION['user']->getId());
 

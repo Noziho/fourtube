@@ -25,9 +25,18 @@ class UserController extends AbstractController
 
             $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
             $username= filter_var($_POST['username'], FILTER_SANITIZE_STRING);
-
             $password = password_hash($_POST['password'], PASSWORD_ARGON2I);
+            $clear_password = $_POST['password'];
             $password_repeat = $_POST['password_repeat'];
+
+            self::rangeCheck(6, 150, $email, '/?c=user&a=register&f=LongueurMail');
+            self::rangeCheck(4, 40, $username, '/?c=user&a=register&f=LongueurPseudo');
+            self::rangeCheck(8, 30, $password_repeat, '/?c=user&a=register&f=LongueurPassword');
+
+            if ($clear_password !== $password) {
+                header("Location: /?c=user&a=register&f=PasswordPasEgaux");
+                exit();
+            }
 
             if (!password_verify($password_repeat, $password)) {
                 header("Location: /?c=home&f=2");
