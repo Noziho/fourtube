@@ -29,7 +29,7 @@ class VideoManager
     public static function getAll(): array
     {
         $data = [];
-        $query = DB_Connect::dbConnect()->query("SELECT * FROM " . self::TABLE);
+        $query = DB_Connect::dbConnect()->query("SELECT * FROM " . self::TABLE." ORDER BY id DESC");
         if ($query) {
             foreach ($query->fetchAll() as $video) {
                 $data[] = self::makeVideo($video);
@@ -62,5 +62,11 @@ class VideoManager
         $query = DB_Connect::dbConnect()->query("SELECT * FROM ".self::TABLE." WHERE id = $video_id");
         return $query->execute() ? self::makeVideo($query->fetch()) : null;
 
+    }
+
+    public static function videoExist (int $id)
+    {
+        $query = DB_Connect::dbConnect()->query("SELECT count(*) as cnt FROM ".self::TABLE." WHERE id = $id");
+        return $query ? $query->fetch()['cnt'] : 0;
     }
 }

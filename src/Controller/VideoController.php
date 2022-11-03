@@ -33,6 +33,10 @@ class VideoController extends AbstractController
 
     public function addVideo ()
     {
+        if (!isset($_SESSION['user'])) {
+            header("Location: /?c=home");
+            exit();
+        }
         if (isset($_FILES['userVideoFile'])) {
 
 
@@ -52,20 +56,30 @@ class VideoController extends AbstractController
             $user = UserManager::getUserById($_SESSION['user']->getId());
 
             if (VideoManager::addVideo($sanitize_video_name, $title, $description, $user->getId())) {
-                header("Location: /?c=video&f=sucess");
+                header("Location: /?c=home&f=sucessUpload");
 
             }else {
                 header("Location: /?c=video&f=error");
+                exit();
             }
 
         }
 
     }
 
-    public function showVideo (int $id)
+    public function showVideo (int $id = null)
     {
-        self::render('video/video', [
-            'video' => VideoManager::getVideoById($id),
-        ]);
+        if (null === $id) {
+            header("Location: /?c=home");
+            exit();
+        }
+        if (VideoManager::videoExist($id)) {
+            self::render('video/video', [
+                'video' => VideoManager::getVideoById($id),
+            ]);
+        } else {
+            header("Location: /?c=home");
+        }
+
     }
 }
