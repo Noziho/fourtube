@@ -69,4 +69,16 @@ class VideoManager
         $query = DB_Connect::dbConnect()->query("SELECT count(*) as cnt FROM ".self::TABLE." WHERE id = $id");
         return $query ? $query->fetch()['cnt'] : 0;
     }
+
+    public static function getAllVideoByUserId (int $id): array
+    {
+        $data = [];
+        $query = DB_Connect::dbConnect()->query("SELECT * FROM " . self::TABLE." WHERE user_fk = $id");
+        if ($query) {
+            foreach ($query->fetchAll() as $video) {
+                $data[] = self::makeVideo($video);
+            }
+        }
+        return $data;
+    }
 }

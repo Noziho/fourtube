@@ -158,3 +158,36 @@ video {
     width: 100%;
     margin: 1rem;
 }
+
+.profil_container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    padding: 5rem;
+}
+
+#profil_info {
+    background: #2e3136;
+    padding: 2rem;
+    width: 80%;
+}
+
+#profil_info > div > div {
+    margin-top: 1rem;
+    background: #191919;
+    padding: 1rem;
+}
+
+#profil_info > div :hover {
+    background: #454545;
+    transition: 1s;
+    cursor: grab;
+}
+
+#personal_info {
+    padding: 1rem;
+}
+
+#title_video {
+    margin-top: 1rem;
+}

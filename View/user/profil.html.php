@@ -1,10 +1,12 @@
 <?php
 
 use App\Model\Entity\User;
+use App\Model\Entity\Video;
 
-if (isset($data['user'])) {
+if (isset($data['user']) && $data['videos']) {
     /** @var User $user**/
     $user = $data['user'];
+    $videos = $data['videos'];
 
     if ($user->getId() !== $_SESSION['user']->getId()) {
         header("Location: /?c=home");
@@ -12,9 +14,24 @@ if (isset($data['user'])) {
     }
 } ?>
 
-<div class="main_container">
-    <div>
-        <p><?= $user->getEmail() ?></p>
-        <p><?= $user->getUsername() ?></p>
+<div class="profil_container">
+    <div id="profil_info">
+        <div>
+            <h1>Mes infos:</h1>
+            <div id="personal_info">
+                <p><?= $user->getEmail() ?></p>
+                <p><?= $user->getUsername() ?></p>
+            </div>
+            <h2 id="title_video">Mes vidéos: </h2>
+            <?php
+                foreach ($videos as $video) {
+                    /** @var Video $video **/?>
+                        <div>
+                            <p><?= $video->getTitle() ?></p>
+                            <p><?= $video->getDescription() ?></p>
+                        </div><?php
+                }
+            ?>
+        </div>
     </div>
 </div>

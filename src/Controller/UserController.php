@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Manager\UserManager;
+use App\Model\Manager\VideoManager;
 
 class UserController extends AbstractController
 {
@@ -107,6 +108,7 @@ class UserController extends AbstractController
 
         self::render('user/profil', [
             "user" => UserManager::getUserById($id),
+            "videos" => VideoManager::getAllVideoByUserId($id),
         ]);
 
     }
