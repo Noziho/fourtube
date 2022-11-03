@@ -71,5 +71,11 @@ class UserManager {
         }
     }
 
+    public static function mailExist (string $email)
+    {
+        $query = DB_Connect::dbConnect()->query("SELECT count(*) as cnt FROM ".self::TABLE." WHERE email = \"$email\"");
+        return $query ? $query->fetch()['cnt'] : 0;
+    }
+
 
 }

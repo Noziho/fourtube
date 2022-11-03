@@ -33,6 +33,11 @@ class UserController extends AbstractController
             self::rangeCheck(4, 40, $username, '/?c=user&a=register&f=LongueurPseudo');
             self::rangeCheck(8, 30, $password_repeat, '/?c=user&a=register&f=LongueurPassword');
 
+            if (UserManager::mailExist($email)) {
+                header("Location: /?c=user&a=register&f=LeMailExisteDeja");
+                exit();
+            }
+
             if ($clear_password !== $password) {
                 header("Location: /?c=user&a=register&f=PasswordPasEgaux");
                 exit();
