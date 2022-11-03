@@ -77,5 +77,11 @@ class UserManager {
         return $query ? $query->fetch()['cnt'] : 0;
     }
 
+    public static function usernameExist (string $username)
+    {
+        $query = DB_Connect::dbConnect()->query("SELECT count(*) as cnt FROM ".self::TABLE." WHERE username = \"$username\"");
+        return $query ? $query->fetch()['cnt'] : 0;
+    }
+
 
 }

@@ -38,6 +38,11 @@ class UserController extends AbstractController
                 exit();
             }
 
+            if (UserManager::usernameExist($username)) {
+                header("Location: /?c=user&a=register&f=LePseudoExisteDeja");
+                exit();
+            }
+
             if ($clear_password !== $password) {
                 header("Location: /?c=user&a=register&f=PasswordPasEgaux");
                 exit();
