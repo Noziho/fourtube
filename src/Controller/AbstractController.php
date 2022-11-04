@@ -31,4 +31,15 @@ abstract class AbstractController {
             exit();
         }
     }
+
+    public static function checkMimeType($tmpname): bool
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $mtype = finfo_file($finfo, $tmpname);
+        if (strpos($mtype, 'video/') === 0) {
+            return true;
+        }
+        finfo_close($finfo);
+        return false;
+    }
 }

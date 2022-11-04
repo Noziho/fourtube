@@ -9,6 +9,7 @@
     "require": {
         "symfony/error-handler": "^5.4",
       "ext-pdo": "*",
-      "ext-openssl": "*"
+      "ext-openssl": "*",
+      "ext-fileinfo": "*"
     }
 }

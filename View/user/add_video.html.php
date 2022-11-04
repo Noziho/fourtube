@@ -12,13 +12,12 @@
             </div>
 
             <div class="margin_div_form">
-                <input id="userVideoFile" type="file" name="userVideoFile" placeholder="Cliquez pour upload votre vidéo !" required>
+                <input id="userVideoFile" type="file" name="userVideoFile" placeholder="Cliquez pour upload votre vidéo !" accept="video/mp4" required>
             </div>
 
             <div class="margin_div_form button_container">
                 <button id="login_button" name="submit">Upload</button>
             </div>
-
         </form>
     </fieldset>
 </div>

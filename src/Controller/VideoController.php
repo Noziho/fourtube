@@ -29,15 +29,14 @@ class VideoController extends AbstractController
 
         try {
             $bytes = random_bytes(15);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             $bytes = openssl_random_pseudo_bytes(15);
         }
 
-        return bin2hex($bytes). '.' .$infos['extension'];
+        return bin2hex($bytes) . '.' . $infos['extension'];
     }
 
-    public function addVideo ()
+    public function addVideo()
     {
         if (!isset($_SESSION['user'])) {
             header("Location: /?c=home");
@@ -52,31 +51,37 @@ class VideoController extends AbstractController
                 mkdir('assets/video/', '0755');
             }
 
-            move_uploaded_file($tmp_name, 'assets/video/'. $video_name);
+            if (AbstractController::checkMimeType($tmp_name)) {
+                move_uploaded_file($tmp_name, 'assets/video/' . $video_name);
 
-            $sanitize_video_name = preg_replace('/\\.[^.\\s]{2,4}$/', '', $video_name);
+                $sanitize_video_name = preg_replace('/\\.[^.\\s]{2,4}$/', '', $video_name);
 
-            $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
-            $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
+                $title = filter_var($_POST['title'], FILTER_SANITIZE_STRING);
+                $description = filter_var($_POST['description'], FILTER_SANITIZE_STRING);
 
-            self::rangeCheck(8, 30, $title, '/?c=video&a=video&f=MauvaiseLongueurDeTitre');
-            self::rangeCheck(8, 30, $description, '/?c=video&a=video&f=MauvaiseLongueurDeDescription');
+                self::rangeCheck(8, 30, $title, '/?c=video&a=video&f=MauvaiseLongueurDeTitre');
+                self::rangeCheck(8, 30, $description, '/?c=video&a=video&f=MauvaiseLongueurDeDescription');
 
-            $user = UserManager::getUserById($_SESSION['user']->getId());
+                $user = UserManager::getUserById($_SESSION['user']->getId());
 
-            if (VideoManager::addVideo($sanitize_video_name, $title, $description, $user->getId())) {
-                header("Location: /?c=home&f=sucessUpload");
+                if (VideoManager::addVideo($sanitize_video_name, $title, $description, $user->getId())) {
+                    header("Location: /?c=home&f=sucessUpload");
 
-            }else {
-                header("Location: /?c=video&f=error");
+                } else {
+                    header("Location: /?c=video&f=error");
+                    exit();
+                }
+            }
+            else {
+                header("Location: /?c=home");
                 exit();
             }
-
         }
+
 
     }
 
-    public function showVideo (int $id = null)
+    public function showVideo(int $id = null)
     {
         if (null === $id) {
             header("Location: /?c=home");
@@ -92,7 +97,7 @@ class VideoController extends AbstractController
         }
     }
 
-    public function deleteVideo (int $video_id = null)
+    public function deleteVideo(int $video_id = null)
     {
 
         if (null === $video_id) {
