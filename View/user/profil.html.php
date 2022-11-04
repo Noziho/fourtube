@@ -29,6 +29,9 @@ if (isset($data['user']) && $data['videos']) {
                         <div>
                             <p><?= $video->getTitle() ?></p>
                             <p><?= $video->getDescription() ?></p>
+                            <form action="/?c=video&a=delete-video&video_id=<?= $video->getId() ?>" method="post">
+                                <button>Supprimer la vidéo</button>
+                            </form>
                         </div><?php
                 }
             ?>

@@ -81,4 +81,14 @@ class VideoManager
         }
         return $data;
     }
+
+    public static function getVideoByUserId (int $id): ?Video
+    {
+        $query = DB_Connect::dbConnect()->query("SELECT * FROM ".self::TABLE. " WHERE user_fk = $id ");
+        return $query->execute() ? self::makeVideo($query->fetch()) : null;
+    }
+
+    public static function deleteVideoById(int $video_id) :void {
+        DB_Connect::dbConnect()->query("DELETE FROM " .self::TABLE . " WHERE id = $video_id");
+    }
 }

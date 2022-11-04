@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Entity\Video;
 use App\Model\Manager\UserManager;
 use App\Model\Manager\VideoManager;
 use Exception;
@@ -87,6 +88,25 @@ class VideoController extends AbstractController
         } else {
             header("Location: /?c=home");
         }
+    }
+
+    public function deleteVideo (int $video_id = null)
+    {
+
+        if (null === $video_id) {
+            header("Location: /?c=home");
+            exit();
+        }
+
+        $video = VideoManager::getVideoById($video_id)->getAuthor()->getId();
+        $user = $_SESSION['user']->getId();
+
+        if ($video === $user) {
+            VideoManager::deleteVideoById($video_id);
+            header("Location: /?c=user&a=profil&id=$user");
+            exit();
+        }
+
 
     }
 }
