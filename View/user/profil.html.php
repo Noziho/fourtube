@@ -3,7 +3,7 @@
 use App\Model\Entity\User;
 use App\Model\Entity\Video;
 
-if (isset($data['user']) && $data['videos']) {
+if (isset($data['user']) || isset($data['videos'])) {
     /** @var User $user**/
     $user = $data['user'];
     $videos = $data['videos'];

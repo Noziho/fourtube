@@ -100,17 +100,33 @@ class UserController extends AbstractController
         header("Location: /?c=home&f=LogOut");
     }
 
-    public function profil (int $id) {
+    public function profil (int $id = null) {
         if (!isset($_SESSION['user'])) {
             header("Location: /?c=home");
             exit();
         }
 
-        self::render('user/profil', [
-            "user" => UserManager::getUserById($id),
-            "videos" => VideoManager::getAllVideoByUserId($id),
-        ]);
+        if (null === $id) {
+            header("Location: /?c=home");
+            exit();
+        }
 
+        if (UserManager::userExist($id)) {
+            if ($_SESSION['user']->getId() === UserManager::getUserById($id)->getId()) {
+                self::render('user/profil', [
+                    "user" => UserManager::getUserById($id),
+                    "videos" => VideoManager::getAllVideoByUserId($id),
+                ]);
+            }
+            else {
+                header("Location: /?c=home");
+                exit();
+            }
+        }
+        else {
+            header("Location: /?c=home");
+            exit();
+        }
     }
 
 }
