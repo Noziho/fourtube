@@ -3,14 +3,22 @@
 namespace App\Model\Manager;
 
 use App\Model\DB_Connect;
+use App\Model\Entity\Comments;
+use App\Model\Entity\User;
 
 class CommentsManager
 {
 
     const TABLE = "ndmp22_comments";
 
-    public static function makeComments ()
+    public static function makeComments (array $data): Comments
     {
+        return (new Comments())
+            ->setId($data['id'])
+            ->setContent($data['content'])
+            ->setUserFk(UserManager::getUserById($data['user_fk']))
+            ->setVideoFk(VideoManager::getVideoById($data['video_fk']))
+            ;
 
     }
 
@@ -30,5 +38,17 @@ class CommentsManager
         }
 
         return false;
+    }
+
+    public static function getAllCommentsByVideoId (int $video_fk): array
+    {
+        $data = [];
+        $query = DB_Connect::dbConnect()->query("SELECT * FROM " . self::TABLE." WHERE video_fk = $video_fk ORDER BY id DESC");
+        if ($query) {
+            foreach ($query->fetchAll() as $video) {
+                $data[] = self::makeComments($video);
+            }
+        }
+        return $data;
     }
 }

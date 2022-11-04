@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\Entity\Video;
+use App\Model\Manager\CommentsManager;
 use App\Model\Manager\UserManager;
 use App\Model\Manager\VideoManager;
 use Exception;
@@ -84,6 +85,7 @@ class VideoController extends AbstractController
         if (VideoManager::videoExist($id)) {
             self::render('video/video', [
                 'video' => VideoManager::getVideoById($id),
+
             ]);
         } else {
             header("Location: /?c=home");

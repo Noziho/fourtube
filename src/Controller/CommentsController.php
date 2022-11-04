@@ -25,7 +25,7 @@ class CommentsController extends AbstractController
         $content = filter_var($_POST['comments'], FILTER_SANITIZE_STRING);
 
         if (CommentsManager::addComments($content, $video_fk, $id)) {
-            header("Location: /?c=home");
+            header("Location: /?c=video&a=show-video&id=$video_fk");
             exit();
         }
 

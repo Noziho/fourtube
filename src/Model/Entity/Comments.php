@@ -2,7 +2,9 @@
 
 namespace App\Model\Entity;
 
-class Comments
+use App\Controller\AbstractController;
+
+class Comments extends AbstractEntity
 {
     private string $content;
     private User $user_fk;
