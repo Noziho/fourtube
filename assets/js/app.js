@@ -1,3 +1,4 @@
+import '../css/style.css';
 const video = document.querySelectorAll('.video_container');
 
 for (let i = 0; i < video.length; i++) {
