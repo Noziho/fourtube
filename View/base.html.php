@@ -6,6 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>FourTube - Le YouTube des Ksos</title>
+    <link rel="stylesheet" href="/build/css/app.css">
 </head>
 <body>
 <header>
@@ -39,7 +40,7 @@
 <div><?= $html ?></div>
 
 
-<script src="/assets/js/bundle.js"></script>
+<script src="/build/js/app-bundle.js"></script>
 <script src="https://kit.fontawesome.com/e40f017040.js" crossorigin="anonymous"></script>
 </body>
 </html>

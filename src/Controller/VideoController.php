@@ -47,12 +47,12 @@ class VideoController extends AbstractController
 
             $tmp_name = $_FILES['userVideoFile']['tmp_name'];
             $video_name = $this->getRandomName($_FILES['userVideoFile']['name']);
-            if (!is_dir('assets/video/')) {
-                mkdir('assets/video/', '0755');
+            if (!is_dir('../assets/video/')) {
+                mkdir('../assets/video/', '0755');
             }
 
             if (AbstractController::checkMimeType($tmp_name)) {
-                move_uploaded_file($tmp_name, 'assets/video/' . $video_name);
+                move_uploaded_file($tmp_name, '../assets/video/' . $video_name);
 
                 $sanitize_video_name = preg_replace('/\\.[^.\\s]{2,4}$/', '', $video_name);
 

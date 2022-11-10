@@ -15,7 +15,7 @@ if (isset($data['video'])) {
 ?>
 
 <div class="main_container">
-    <video id="single_video" src="/assets/video/<?= $video->getVideoName() ?>.mp4 " controls width="100%"></video>
+    <video id="single_video" src="/build/video/<?= $video->getVideoName() ?>.mp4 " controls width="100%"></video>
     <p><?= $video->getTitle() ?></p>
     <p><?= $video->getAuthor()->getUsername() ?></p>
     <div id="container_comments">
